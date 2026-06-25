@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       EDIT: Change the title to your name
+  ============================================================ -->
+  <title>Dr. [Your Name] — Mathematician</title>
+
+  <!-- MathJax for LaTeX rendering — FREE, no setup needed -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-cml.js" async></script>
+
+  <style>
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* === BASE === */
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      background: #F8F8F6;
+      color: #1A1A1A;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* === LAYOUT === */
+    .page { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    /* === NAV === */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(248,248,246,0.95);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      border-bottom: 1px solid #E5E5E0;
+    }
+    .nav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    /* EDIT: Your name in the nav */
+    .nav-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15px;
+      color: #1A1A1A;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13px;
+      color: #666;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #2E5EAA; }
+
+    /* Mobile nav */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 22px;
+      color: #1A1A1A;
+      line-height: 1;
+    }
+    @media (max-width: 620px) {
+      .hamburger { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 56px;
+        left: 0; right: 0;
+        background: #F8F8F6;
+        border-bottom: 1px solid #E5E5E0;
+        padding: 8px 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li a { display: block; padding: 10px 24px; font-size: 14px; }
+    }
+
+    /* === HERO === */
+    .hero {
+      position: relative;
+      padding: 72px 0 60px;
+      overflow: hidden;
+    }
+    .hero-sigma {
+      position: absolute;
+      right: -10px;
+      top: 0;
+      font-family: Georgia, serif;
+      font-size: 300px;
+      color: #1A1A1A;
+      opacity: 0.03;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #2E5EAA;
+      margin-bottom: 16px;
+    }
+    /* EDIT: Your full name -->*/
+    .hero-name {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 48px;
+      font-weight: normal;
+      color: #1A1A1A;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    /* EDIT: Your designation -->*/
+    .hero-title {
+      font-size: 17px;
+      color: #444;
+      margin-bottom: 6px;
+    }
+    /* EDIT: Your institution -->*/
+    .hero-affil {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 36px;
+    }
+    /* EDIT: Your bio paragraph -->*/
+    .hero-bio {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.8;
+      max-width: 580px;
+      margin-bottom: 32px;
+    }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 9px 22px;
+      font-size: 13px;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.18s;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary { background: #2E5EAA; color: #fff; border: 1px solid #2E5EAA; }
+    .btn-primary:hover { background: #244d8e; border-color: #244d8e; }
+    .btn-outline { background: transparent; color: #2E5EAA; border: 1px solid #2E5EAA; }
+    .btn-outline:hover { background: #eef2fa; }
+
+    /* === SECTIONS === */
+    .section {
+      padding: 60px 0;
+      border-top: 1px solid #E5E5E0;
+    }
+    .section-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #2E5EAA;
+      margin-bottom: 8px;
+    }
+    .section-heading {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      font-weight: normal;
+      color: #1A1A1A;
+      margin-bottom: 36px;
+    }
+
+    /* === RESEARCH INTERESTS (chips) === */
+    .interests { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .interest-chip {
+      padding: 6px 16px;
+      background: #fff;
+      border: 1px solid #D8D8D2;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #444;
+    }
+
+    /* === PAPERS === */
+    .paper-list { display: flex; flex-direction: column; gap: 20px; }
+    .paper-item {
+      background: #fff;
+      border: 1px solid #E5E5E0;
+      border-left: 3px solid #2E5EAA;
+      border-radius: 6px;
+      padding: 20px 22px;
+    }
+    .paper-title {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15.5px;
+      color: #1A1A1A;
+      line-height: 1.45;
+      margin-bottom: 6px;
+    }
+    .paper-meta { font-size: 13px; color: #888; margin-bottom: 5px; }
+    .paper-venue { font-size: 13px; color: #2E5EAA; font-style: italic; margin-bottom: 12px; }
+    .paper-abstract {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 14px;
+      display: none;
+      border-top: 1px solid #F0F0EC;
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+    .paper-abstract.open { display: block; }
+    .paper-footer { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      background: #EEF2FA;
+      color: #2E5EAA;
+      border-radius: 3px;
+      letter-spacing: 0.03em;
+    }
+    .paper-toggle {
+      font-size: 12px;
+      color: #999;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .paper-toggle:hover { color: #2E5EAA; }
+    .paper-link {
+      font-size: 12px;
+      color: #2E5EAA;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .paper-link:hover { text-decoration: underline; }
+
+    /* === CONFERENCES === */
+    .conf-list { display: flex; flex-direction: column; }
+    .conf-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 0 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid #F0F0EC;
+      align-items: start;
+    }
+    .conf-item:last-child { border-bottom: none; }
+    .conf-year {
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #CCC;
+      font-weight: normal;
+      padding-top: 2px;
+    }
+    .conf-talk { font-size: 15px; color: #1A1A1A; margin-bottom: 5px; line-height: 1.45; }
+    .conf-where { font-size: 13px; color: #888; }
+    .conf-where strong { color: #2E5EAA; font-weight: normal; }
+    .conf-badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-left: 6px;
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
+    .badge-invited { background: #EEF2FA; color: #2E5EAA; }
+    .badge-contributed { background: #F0F8F4; color: #2E8A58; }
+    .badge-poster { background: #FFF5EC; color: #B06000; }
+
+    /* === BLOG === */
+    .blog-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 48px 32px;
+      background: #fff;
+      border: 1.5px dashed #D8D8D2;
+      border-radius: 8px;
+      gap: 12px;
+    }
+    .blog-soon-icon { font-size: 32px; color: #CCC; }
+    .blog-soon-title { font-family: Georgia, serif; font-size: 18px; color: #888; font-weight: normal; }
+    .blog-soon-msg { font-size: 14px; color: #aaa; max-width: 380px; line-height: 1.7; }
+
+    /* === PROJECTS === */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .proj-card {
+      background: #fff;
+      border: 1px solid #E5E5E0;
+      border-radius: 6px;
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .proj-card:hover { border-color: #2E5EAA; transform: translateY(-2px); }
+    .proj-icon { font-size: 22px; color: #2E5EAA; margin-bottom: 14px; }
+    .proj-name { font-size: 15px; font-weight: 500; color: #1A1A1A; margin-bottom: 8px; }
+    .proj-desc { font-size: 13px; color: #666; line-height: 1.65; }
+    .proj-tags { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+
+    /* === CONTACT === */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .contact-card {
+      background: #fff;
+      border: 1px solid #E5E5E0;
+      border-radius: 6px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: #1A1A1A;
+      transition: border-color 0.2s;
+    }
+    .contact-card:hover { border-color: #2E5EAA; }
+    .contact-icon { font-size: 20px; color: #2E5EAA; flex-shrink: 0; }
+    .contact-label { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-value { font-size: 13px; color: #1A1A1A; margin-top: 2px; word-break: break-all; }
+
+    /* === FOOTER === */
+    footer {
+      padding: 36px 0 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #bbb;
+      border-top: 1px solid #E5E5E0;
+      margin-top: 0;
+    }
+    footer a { color: #bbb; text-decoration: none; }
+    footer a:hover { color: #2E5EAA; }
+
+    /* === BACK TO TOP === */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #2E5EAA;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .back-to-top.visible { display: flex; }
+    .back-to-top:hover { background: #244d8e; }
+
+    /* === UTILITIES === */
+    .mt-sm { margin-top: 8px; }
+    .mt-md { margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+  STICKY NAVIGATION
+  EDIT: Replace [Your Name] with your name everywhere below
+============================================================ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-name">[Your Name]</a><!-- EDIT: Your name -->
+    <button class="hamburger" aria-label="Toggle menu" onclick="toggleNav()">&#9776;</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#papers" onclick="closeNav()">Papers</a></li>
+      <li><a href="#talks" onclick="closeNav()">Talks</a></li>
+      <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+      <li><a href="#blog" onclick="closeNav()">Blog</a></li>
+      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================================================
+  HERO / ABOUT
+============================================================ -->
+<div class="page" id="top">
+  <section class="hero" id="about">
+    <div class="hero-sigma" aria-hidden="true">Σ</div>
+
+    <!-- EDIT: Change the eyebrow line to match your role -->
+    <p class="hero-eyebrow">Mathematician &middot; Researcher &middot; Educator</p>
+
+    <!-- EDIT: Your full name with title -->
+    <h1 class="hero-name">Dr. [Your Full Name]</h1>
+
+    <!-- EDIT: Your exact designation -->
+    <p class="hero-title">[e.g., Assistant Professor of Mathematics]</p>
+
+    <!-- EDIT: Your institution and city -->
+    <p class="hero-affil">[e.g., Department of Mathematics, XYZ University] &middot; Ranchi, Jharkhand</p>
+
+    <!-- EDIT: Write 2–3 sentences about your research. You can use LaTeX here.
+         Example: I work in the area of $\ell^2$-cohomology and spectral theory. -->
+    <p class="hero-bio">
+      I work in the area of [your research area, e.g., functional analysis and operator theory],
+      with a focus on [specific topic, e.g., spectral properties of self-adjoint operators on
+      Hilbert spaces]. My work draws on tools from [related fields] and aims to [goal or motivation].
+      I am particularly interested in [specific open problem or conjecture].
+    </p>
+
+    <div class="hero-actions">
+      <a href="#papers" class="btn btn-primary">View Publications</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      <!-- EDIT: Replace # with the URL to your CV PDF -->
+      <a href="#" class="btn btn-outline" target="_blank">Download CV</a>
+    </div>
+
+    <!-- EDIT: Your research interest keywords -->
+    <div class="interests">
+      <span class="interest-chip">[Area 1, e.g., Functional Analysis]</span>
+      <span class="interest-chip">[Area 2, e.g., Number Theory]</span>
+      <span class="interest-chip">[Area 3, e.g., Algebraic Topology]</span>
+      <span class="interest-chip">[Area 4, e.g., Combinatorics]</span>
+      <span class="interest-chip">[Area 5]</span>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+  RESEARCH PAPERS
+  HOW TO ADD A PAPER:
+    1. Copy one <div class="paper-item">...</div> block
+    2. Paste it below the last one
+    3. Update title, authors, venue, abstract, tags
+    4. Give the abstract a unique id (e.g. abs4, abs5...)
+    5. Update the onclick in the button to match that id
+
+  LaTeX in titles:  write $...$ for math, e.g.:
+    "On the $L^2$-norm of $\zeta(s)$ on the critical line"
+============================================================ -->
+<div class="page">
+  <section class="section" id="papers">
+    <p class="section-eyebrow">Publications</p>
+    <h2 class="section-heading">Research Papers</h2>
+
+    <div class="paper-list">
+
+      <!-- ── PAPER 1 ── EDIT everything inside -->
+      <div class="paper-item">
+        <div class="paper-title">
+          <!-- EDIT: Paper title. Use $...$ for math symbols -->
+          [Paper Title, e.g., On the $L^2$-Cohomology of $\mathfrak{gl}_\infty(\mathbb{F}_p)$]
+        </div>
+        <div class="paper-meta">
+          <!-- EDIT: Authors and year -->
+          [Your Name], [Co-author Name] &middot; 2024
+        </div>
+        <div class="paper-venue">
+          <!-- EDIT: Journal name, volume, issue -->
+          [e.g., Journal of Pure and Applied Algebra, Vol. 228, No. 3]
+        </div>
+        <div class="paper-abstract" id="abs1">
+          <!-- EDIT: Abstract text. LaTeX works here too. -->
+          We investigate [what the paper is about]. Our main result establishes that
+          [main theorem in plain language]. As a consequence, we derive [corollaries].
+          The proof uses [techniques]. This extends earlier work of [references].
+        </div>
+        <div class="paper-footer">
+          <!-- EDIT: Subject tags -->
+          <span class="tag">[Tag 1, e.g., Algebra]</span>
+          <span class="tag">[Tag 2, e.g., Lie Theory]</span>
+          <button class="paper-toggle" onclick="toggleAbstract('abs1', this)">Show abstract</button>
+          <!-- EDIT: Replace # with real PDF and DOI links -->
+          <a href="#" class="paper-link" target="_blank">&#x2193; PDF</a>
+          <a href="#" class="paper-link" target="_blank">DOI &rarr;</a>
+          <a href="#" class="paper-link" target="_blank">arXiv &rarr;</a>
+        </div>
+      </div>
+
+      <!-- ── PAPER 2 ── EDIT everything inside -->
+      <div class="paper-item">
+        <div class="paper-title">
+          [Paper Title, e.g., Asymptotic Behavior of Spectral Gaps for Random Schr&ouml;dinger Operators on $\ell^2(\mathbb{Z}^d)$]
+        </div>
+        <div class="paper-meta">[Your Name] &middot; 2023</div>
+        <div class="paper-venue">[e.g., Annals of Probability, Vol. 51, No. 4]</div>
+        <div class="paper-abstract" id="abs2">
+          We study the asymptotic distribution of spectral gaps for random Schr&ouml;dinger operators.
+          Using large deviation techniques, we derive sharp estimates for the probability that
+          the spectral gap exceeds a given threshold $\lambda > 0$ as the coupling constant grows.
+        </div>
+        <div class="paper-footer">
+          <span class="tag">[Tag 1]</span>
+          <span class="tag">[Tag 2]</span>
+          <button class="paper-toggle" onclick="toggleAbstract('abs2', this)">Show abstract</button>
+          <a href="#" class="paper-link" target="_blank">&#x2193; PDF</a>
+          <a href="#" class="paper-link" target="_blank">DOI &rarr;</a>
+          <a href="#" class="paper-link" target="_blank">arXiv &rarr;</a>
+        </div>
+      </div>
+
+      <!-- ── PAPER 3 ── EDIT everything inside -->
+      <div class="paper-item">
+        <div class="paper-title">
+          [Paper Title, e.g., Enumerative Combinatorics of Lattice Paths Avoiding Consecutive Patterns in $\mathbb{Z}^2$]
+        </div>
+        <div class="paper-meta">[Your Name], [Co-author], [Co-author] &middot; 2022</div>
+        <div class="paper-venue">[e.g., Discrete Mathematics, Vol. 345]</div>
+        <div class="paper-abstract" id="abs3">
+          We provide generating function formulas for lattice paths avoiding a prescribed
+          set of consecutive patterns. The approach combines a transfer matrix method with
+          a bijection to certain classes of restricted permutations of $S_n$.
+        </div>
+        <div class="paper-footer">
+          <span class="tag">[Tag 1]</span>
+          <span class="tag">[Tag 2]</span>
+          <button class="paper-toggle" onclick="toggleAbstract('abs3', this)">Show abstract</button>
+          <a href="#" class="paper-link" target="_blank">&#x2193; PDF</a>
+          <a href="#" class="paper-link" target="_blank">DOI &rarr;</a>
+          <a href="#" class="paper-link" target="_blank">arXiv &rarr;</a>
+        </div>
+      </div>
+
+      <!--
+        ╔══════════════════════════════════════════╗
+        ║  COPY THE BLOCK ABOVE TO ADD MORE PAPERS ║
+        ║  Remember to give each abstract a new id  ║
+        ╚══════════════════════════════════════════╝
+      -->
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+  CONFERENCE PRESENTATIONS
+  HOW TO ADD A TALK:
+    Copy one <div class="conf-item">...</div> block and edit.
+    Badges: badge-invited | badge-contributed | badge-poster
+============================================================ -->
+<div class="page">
+  <section class="section" id="talks">
+    <p class="section-eyebrow">Presentations</p>
+    <h2 class="section-heading">Conference Talks &amp; Paper Presentations</h2>
+
+    <div class="conf-list">
+
+      <!-- ── TALK 1 ── EDIT -->
+      <div class="conf-item">
+        <div class="conf-year">2024</div>
+        <div>
+          <div class="conf-talk">
+            <!-- EDIT: Talk title — LaTeX works here -->
+            [Talk title, e.g., Decomposition Theorems for Graded Modules over Noetherian Rings]
+          </div>
+          <div class="conf-where">
+            <!-- EDIT: Conference name, location, type -->
+            <strong>[Conference name, e.g., International Congress of Mathematicians]</strong>
+            &middot; [City, Country]
+            <span class="conf-badge badge-invited">Invited</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TALK 2 ── EDIT -->
+      <div class="conf-item">
+        <div class="conf-year">2023</div>
+        <div>
+          <div class="conf-talk">
+            [Talk title, e.g., Spectral Gaps and Anderson Localization &mdash; New Estimates]
+          </div>
+          <div class="conf-where">
+            <strong>[e.g., Indian Mathematical Society Annual Conference]</strong>
+            &middot; [City, India]
+            <span class="conf-badge badge-contributed">Contributed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TALK 3 ── EDIT -->
+      <div class="conf-item">
+        <div class="conf-year">2023</div>
+        <div>
+          <div class="conf-talk">
+            [Talk title, e.g., Forbidden Patterns in Lattice Paths: A Bijective Approach]
+          </div>
+          <div class="conf-where">
+            <strong>[e.g., National Seminar on Algebra and Analysis]</strong>
+            &middot; [City, India]
+            <span class="conf-badge badge-poster">Poster</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TALK 4 ── EDIT -->
+      <div class="conf-item">
+        <div class="conf-year">2022</div>
+        <div>
+          <div class="conf-talk">
+            [Talk title, e.g., Cohomological Methods in Infinite-Dimensional Lie Theory]
+          </div>
+          <div class="conf-where">
+            <strong>[e.g., Workshop on Algebra and Representation Theory, IIT Bombay]</strong>
+            &middot; Mumbai, India
+            <span class="conf-badge badge-contributed">Contributed</span>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        ╔═══════════════════════════════════════════╗
+        ║  COPY A BLOCK ABOVE TO ADD MORE TALKS     ║
+        ╚═══════════════════════════════════════════╝
+      -->
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+  PROJECTS
+  EDIT: Replace with your actual projects. Can be:
+  — software tools, datasets, lecture notes, outreach work, etc.
+============================================================ -->
+<div class="page">
+  <section class="section" id="projects">
+    <p class="section-eyebrow">Work</p>
+    <h2 class="section-heading">Projects</h2>
+
+    <div class="proj-grid">
+
+      <!-- ── PROJECT 1 ── EDIT -->
+      <div class="proj-card">
+        <!-- Icon options: &#x1F9EE; &#x1F4D0; &#x1F4BB; &#x1F4DA; &#x1F4CA; -->
+        <div class="proj-icon">&#x1F9EE;</div>
+        <div class="proj-name">[Project name, e.g., SpectraCalc]</div>
+        <div class="proj-desc">
+          [Description, e.g., A Python toolkit for numerical computation of spectral
+          properties of random matrices, used in research and graduate coursework.]
+        </div>
+        <div class="proj-tags">
+          <span class="tag">[Tag, e.g., Python]</span>
+          <span class="tag">[Tag, e.g., Research Tool]</span>
+        </div>
+      </div>
+
+      <!-- ── PROJECT 2 ── EDIT -->
+      <div class="proj-card">
+        <div class="proj-icon">&#x1F4DA;</div>
+        <div class="proj-name">[Project name, e.g., Lecture Notes on Real Analysis]</div>
+        <div class="proj-desc">
+          [Description, e.g., Open-access notes covering measure theory, Lebesgue
+          integration, and $L^p$ spaces, freely available for students.]
+        </div>
+        <div class="proj-tags">
+          <span class="tag">[Tag, e.g., Education]</span>
+          <span class="tag">[Tag, e.g., Open Access]</span>
+        </div>
+      </div>
+
+      <!-- ── PROJECT 3 ── EDIT -->
+      <div class="proj-card">
+        <div class="proj-icon">&#x1F4CA;</div>
+        <div class="proj-name">[Project name, e.g., Math Olympiad Prep]</div>
+        <div class="proj-desc">
+          [Description, e.g., Problem sets and solutions for national and international
+          mathematics olympiads, mentoring school students in Jharkhand.]
+        </div>
+        <div class="proj-tags">
+          <span class="tag">[Tag, e.g., Outreach]</span>
+          <span class="tag">[Tag, e.g., Olympiad]</span>
+        </div>
+      </div>
+
+      <!--
+        ╔═══════════════════════════════════════════╗
+        ║  COPY A CARD ABOVE TO ADD MORE PROJECTS   ║
+        ╚═══════════════════════════════════════════╝
+      -->
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+  BLOG — Coming Soon placeholder
+  When you start writing, delete this section and replace with
+  real blog post cards (same style as paper cards above).
+============================================================ -->
+<div class="page">
+  <section class="section" id="blog">
+    <p class="section-eyebrow">Writing</p>
+    <h2 class="section-heading">Blog</h2>
+    <div class="blog-soon">
+      <div class="blog-soon-icon">&#x270F;&#xFE0F;</div>
+      <div class="blog-soon-title">Coming soon</div>
+      <p class="blog-soon-msg">
+        I plan to write expository notes on mathematics, reflections on research,
+        and ideas that don&rsquo;t fit neatly into papers. Check back later.
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+  CONTACT
+  EDIT: Replace all # href values and placeholder text
+============================================================ -->
+<div class="page">
+  <section class="section" id="contact">
+    <p class="section-eyebrow">Get in Touch</p>
+    <h2 class="section-heading">Contact</h2>
+
+    <div class="contact-grid">
+
+      <!-- EDIT: Your email -->
+      <a href="mailto:you@university.ac.in" class="contact-card">
+        <span class="contact-icon">&#x2709;&#xFE0F;</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">you@university.ac.in</div><!-- EDIT -->
+        </div>
+      </a>
+
+      <!-- EDIT: Your office location -->
+      <a href="#" class="contact-card">
+        <span class="contact-icon">&#x1F3EB;</span>
+        <div>
+          <div class="contact-label">Office</div>
+          <div class="contact-value">Room [No.], Dept. of Mathematics, [Institution]</div><!-- EDIT -->
+        </div>
+      </a>
+
+      <!-- EDIT: Replace # with your Google Scholar profile URL -->
+      <a href="#" class="contact-card" target="_blank">
+        <span class="contact-icon">&#x1F393;</span>
+        <div>
+          <div class="contact-label">Google Scholar</div>
+          <div class="contact-value">View profile</div>
+        </div>
+      </a>
+
+      <!-- EDIT: Replace # with your GitHub profile URL, or delete if not applicable -->
+      <a href="#" class="contact-card" target="_blank">
+        <span class="contact-icon">&#x1F4BB;</span>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">@[yourhandle]</div><!-- EDIT -->
+        </div>
+      </a>
+
+      <!-- EDIT: Replace # with a direct link to your CV PDF -->
+      <a href="#" class="contact-card" target="_blank">
+        <span class="contact-icon">&#x1F4C4;</span>
+        <div>
+          <div class="contact-label">Curriculum Vitae</div>
+          <div class="contact-value">Download PDF</div>
+        </div>
+      </a>
+
+      <!-- EDIT: Replace # with your LinkedIn URL, or delete if not applicable -->
+      <a href="#" class="contact-card" target="_blank">
+        <span class="contact-icon">&#x1F517;</span>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">View profile</div>
+        </div>
+      </a>
+
+      <!-- EDIT: Replace # with your ORCID profile URL, or delete -->
+      <a href="#" class="contact-card" target="_blank">
+        <span class="contact-icon">&#x1F9EC;</span>
+        <div>
+          <div class="contact-label">ORCID</div>
+          <div class="contact-value">View profile</div>
+        </div>
+      </a>
+
+      <!-- EDIT: Replace # with your ResearchGate URL, or delete -->
+      <a href="#" class="contact-card" target="_blank">
+        <span class="contact-icon">&#x1F52C;</span>
+        <div>
+          <div class="contact-label">ResearchGate</div>
+          <div class="contact-value">View profile</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- EDIT: Your name and institution in footer -->
+  <footer>
+    &copy; 2026 <a href="#top">[Your Name]</a> &middot;
+    Department of Mathematics &middot; [Institution] &middot; Ranchi, Jharkhand
+    <br><span style="margin-top:6px; display:block;">Built with HTML &amp; MathJax &mdash; hosted free on GitHub Pages</span>
+  </footer>
+</div>
+
+<!-- Back to top button -->
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">&#8679;</a>
+
+<!-- ============================================================
+  SCRIPTS — Do not edit unless you know JavaScript
+============================================================ -->
+<script>
+  // Toggle paper abstract
+  function toggleAbstract(id, btn) {
+    const el = document.getElementById(id);
+    const isOpen = el.classList.toggle('open');
+    btn.textContent = isOpen ? 'Hide abstract' : 'Show abstract';
+    if (isOpen && window.MathJax) MathJax.typesetPromise([el]);
+  }
+
+  // Mobile nav toggle
+  function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+  function closeNav() {
+    document.getElementById('nav-links').classList.remove('open');
+  }
+
+  // Back to top button
+  window.addEventListener('scroll', function () {
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+</script>
+
+</body>
+</html>
